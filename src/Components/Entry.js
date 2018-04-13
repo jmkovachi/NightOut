@@ -7,11 +7,20 @@ import {
   Dimensions
 } from 'react-native';
 
-import { Container, Text, Button } from 'native-base';
+import { Container, Text, Button, Input, Item } from 'native-base';
 
 export default class Entry extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      text : null,
+    }
+    this.submit = this.submit.bind(this);
+  }
+
+  submit = () => {
+    var text = this.state.text;
+    this.props.clicked(text);
   }
 
   render() {
@@ -21,10 +30,13 @@ export default class Entry extends Component {
         <Text style={styles.welcome}>
           Welcome to NightOut
         </Text>
-        <Button onPress={this.props.clicked}>
-          <Text style={styles.instructions}>
-            Get started
-          </Text>
+        <Item regular>
+          <Input
+            onChangeText={((text) => this.setState({ text : text }))}
+            placeholder='Where do you want to go tonight?' />
+        </Item>
+        <Button onPress={this.submit}>
+          <Text> Submit </Text>
         </Button>
       </Container>
     );

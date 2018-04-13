@@ -32,26 +32,31 @@ export default class App extends Component<Props> {
     super(props);
     this.state = {
       clicked : false,
+      text : null,
     };
     this.clicked = this.clicked.bind(this);
   }
 
-  clicked() {
+  clicked(text) {
     this.setState({
       clicked : true,
+      text : text,
     });
   }
   render() {
     return (
         this.state.clicked ?
-          <MapView style={styles.container}
-            initialRegion={{
-              latitude: 37.78825,
-              longitude: -122.4324,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
-          />
+          <View style={styles.container}>
+            <MapView style={styles.container}
+              initialRegion={{
+                latitude: 37.78825,
+                longitude: -122.4324,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+              }}
+            />
+            <Text style={styles.welcome}> {this.state.text} </Text>
+          </View>
         :
           <Entry clicked={this.clicked}/>
     );
