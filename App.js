@@ -19,6 +19,8 @@ import Entry from './src/Components/Entry.js';
 
 import MapView, { Marker } from 'react-native-maps';
 
+import PopupDialog from 'react-native-popup-dialog';
+
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
     'Cmd+D or shake for dev menu',
@@ -34,6 +36,7 @@ export default class App extends Component<Props> {
     super(props);
     this.state = {
       clicked : false,
+      popup : false,
       text : null,
       latitude : null,
       longitude : null,
@@ -52,7 +55,10 @@ export default class App extends Component<Props> {
     });
   }
 
+
   onMapPress(e) {
+    this.popupDialog.show();
+
     this.setState({
       markers: [
         ...this.state.markers,
@@ -85,7 +91,13 @@ export default class App extends Component<Props> {
                   pinColor={marker.pinColor}
                 />))}
             </MapView>
-
+            <PopupDialog
+              ref={(popupDialog) => { this.popupDialog = popupDialog; }}
+            >
+              <View>
+                <Text>Hello</Text>
+              </View>
+            </PopupDialog>
             <Text style={styles.welcome}> {this.state.text} </Text>
           </View>
         :
