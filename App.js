@@ -13,11 +13,11 @@ import {
   Dimensions
 } from 'react-native';
 
-import { Container, Button, Text } from 'native-base';
+import { Container, Button, Text, Item, Input } from 'native-base';
 
 import Entry from './src/Components/Entry.js';
 
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, Callout } from 'react-native-maps';
 
 import PopupDialog from 'react-native-popup-dialog';
 
@@ -41,9 +41,14 @@ export default class App extends Component<Props> {
       latitude : null,
       longitude : null,
       markers : [],
+      eventText : null,
+      link : null,
+      description : null,
+      markerCoordinate : null,
     };
     this.clicked = this.clicked.bind(this);
     this.onMapPress = this.onMapPress.bind(this);
+    this.createMarker = this.createMarker.bind(this);
   }
 
   clicked(result) {
@@ -55,20 +60,33 @@ export default class App extends Component<Props> {
     });
   }
 
+  createMarker() {
+    this.popupDialog.dismiss();
+    this.setState({
+      markers : [
+        ...this.state.markers,
+        {
+          coordinate : this.state.markerCoordinate,
+          key: id++,
+          color: '#AAAAA',
+          callout : {
+            eventText : this.state.eventText,
+            description : this.state.description,
+            link : this.state.link,
+          }
+        }
+      ]
+
+    });
+  }
 
   onMapPress(e) {
     this.popupDialog.show();
 
     this.setState({
-      markers: [
-        ...this.state.markers,
-        {
-          coordinate: e.nativeEvent.coordinate,
-          key: id++,
-          color: '#AAAAAA',
-        },
-      ],
+      markerCoordinate : e.nativeEvent.coordinate,
     });
+
   }
 
   render() {
@@ -89,13 +107,39 @@ export default class App extends Component<Props> {
                   key={marker.key}
                   coordinate={marker.coordinate}
                   pinColor={marker.pinColor}
-                />))}
+                >
+                  <Callout>
+                    <View>
+                      <Text> {marker.callout.eventText} </Text>
+                      <Text> {marker.callout.description} </Text>
+                      <Text> {marker.callout.link} </Text>
+                    </View>
+                  </Callout>
+                </Marker>
+              ))}
             </MapView>
             <PopupDialog
               ref={(popupDialog) => { this.popupDialog = popupDialog; }}
             >
               <View>
-                <Text>Hello</Text>
+                <Item regular>
+                  <Input
+                    onChangeText={((text) => this.setState({ eventText : text }))}
+                    placeholder='Event name' />
+                </Item>
+                <Item regular>
+                  <Input
+                    onChangeText={((text) => this.setState({ description : text }))}
+                    placeholder='Event description' />
+                </Item>
+                <Item regular>
+                  <Input
+                    onChangeText={(text) => this.setState({ link : text })}
+                    placeholder='Link' />
+                </Item>
+                <Button onPress={this.createMarker}>
+                  <Text> Submit </Text>
+                </Button>
               </View>
             </PopupDialog>
             <Text style={styles.welcome}> {this.state.text} </Text>
