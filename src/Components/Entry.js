@@ -14,22 +14,30 @@ export default class Entry extends Component {
     super(props);
     this.state = {
       text : null,
-    }
+    };
     this.submit = this.submit.bind(this);
   }
 
   submit = () => {
     var text = this.state.text;
-    fetch('/api/places', {
+    //https://vast-fortress-13759.herokuapp.com/api/places
+    fetch('http://127.0.0.1:4000/api/places', {
       method: 'POST',
       body : JSON.stringify({ location : text }),
       headers : new Headers({
-        'Content-Type' : 'application/json'
+        'Content-Type' : 'application/json',
+        'Accept' : 'application/json',
       })
-    }).then(result => {
-      this.props.clicked({ text : text, latitude : result.latitude, longitude : result.longitude });
+    })
+    .then(result => {
+      return result.json();
+
+    })
+    .then(result => {
+      this.props.clicked({ text : text, latitude : Number(result.lat), longitude : Number(result.lng) });
     })
     .catch(error => {
+      console.log(error);
       // Add a popup that says that the search failed
     });
 

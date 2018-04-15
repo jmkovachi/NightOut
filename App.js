@@ -17,7 +17,7 @@ import { Container, Button, Text } from 'native-base';
 
 import Entry from './src/Components/Entry.js';
 
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -25,6 +25,8 @@ const instructions = Platform.select({
   android: 'Double tap R on your keyboard to reload,\n' +
     'Shake or press menu button for dev menu',
 });
+
+let id = 0;
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -35,8 +37,10 @@ export default class App extends Component<Props> {
       text : null,
       latitude : null,
       longitude : null,
+      markers : [],
     };
     this.clicked = this.clicked.bind(this);
+    this.onMapPress = this.onMapPress.bind(this);
   }
 
   clicked(result) {
@@ -47,6 +51,20 @@ export default class App extends Component<Props> {
       latitude : result.latitude,
     });
   }
+
+  onMapPress(e) {
+    this.setState({
+      markers: [
+        ...this.state.markers,
+        {
+          coordinate: e.nativeEvent.coordinate,
+          key: id++,
+          color: '#AAAAAA',
+        },
+      ],
+    });
+  }
+
   render() {
     return (
         this.state.clicked ?
@@ -58,7 +76,16 @@ export default class App extends Component<Props> {
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421,
               }}
-            />
+              onPress={(e) => this.onMapPress(e)}
+            >
+              {this.state.markers.map(marker => (
+                <Marker
+                  key={marker.key}
+                  coordinate={marker.coordinate}
+                  pinColor={marker.pinColor}
+                />))}
+            </MapView>
+
             <Text style={styles.welcome}> {this.state.text} </Text>
           </View>
         :
