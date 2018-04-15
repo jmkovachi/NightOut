@@ -15,20 +15,8 @@ import {
 
 import { Container, Button, Text, Item, Input } from 'native-base';
 
+import Map from './src/Components/Map.js';
 import Entry from './src/Components/Entry.js';
-
-import MapView, { Marker, Callout } from 'react-native-maps';
-
-import PopupDialog from 'react-native-popup-dialog';
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
-let id = 0;
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -36,19 +24,11 @@ export default class App extends Component<Props> {
     super(props);
     this.state = {
       clicked : false,
-      popup : false,
       text : null,
       latitude : null,
       longitude : null,
-      markers : [],
-      eventText : null,
-      link : null,
-      description : null,
-      markerCoordinate : null,
     };
     this.clicked = this.clicked.bind(this);
-    this.onMapPress = this.onMapPress.bind(this);
-    this.createMarker = this.createMarker.bind(this);
   }
 
   clicked(result) {
@@ -60,90 +40,14 @@ export default class App extends Component<Props> {
     });
   }
 
-  createMarker() {
-    this.popupDialog.dismiss();
-    this.setState({
-      markers : [
-        ...this.state.markers,
-        {
-          coordinate : this.state.markerCoordinate,
-          key: id++,
-          color: '#AAAAA',
-          callout : {
-            eventText : this.state.eventText,
-            description : this.state.description,
-            link : this.state.link,
-          }
-        }
-      ]
-
-    });
-  }
-
-  onMapPress(e) {
-    this.popupDialog.show();
-
-    this.setState({
-      markerCoordinate : e.nativeEvent.coordinate,
-    });
-
-  }
-
   render() {
     return (
         this.state.clicked ?
-          <View style={styles.container}>
-            <MapView style={styles.container}
-              initialRegion={{
-                latitude: this.state.latitude,
-                longitude: this.state.longitude,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
-              }}
-              onPress={(e) => this.onMapPress(e)}
-            >
-              {this.state.markers.map(marker => (
-                <Marker
-                  key={marker.key}
-                  coordinate={marker.coordinate}
-                  pinColor={marker.pinColor}
-                >
-                  <Callout>
-                    <View>
-                      <Text> {marker.callout.eventText} </Text>
-                      <Text> {marker.callout.description} </Text>
-                      <Text> {marker.callout.link} </Text>
-                    </View>
-                  </Callout>
-                </Marker>
-              ))}
-            </MapView>
-            <PopupDialog
-              ref={(popupDialog) => { this.popupDialog = popupDialog; }}
-            >
-              <View>
-                <Item regular>
-                  <Input
-                    onChangeText={((text) => this.setState({ eventText : text }))}
-                    placeholder='Event name' />
-                </Item>
-                <Item regular>
-                  <Input
-                    onChangeText={((text) => this.setState({ description : text }))}
-                    placeholder='Event description' />
-                </Item>
-                <Item regular>
-                  <Input
-                    onChangeText={(text) => this.setState({ link : text })}
-                    placeholder='Link' />
-                </Item>
-                <Button onPress={this.createMarker}>
-                  <Text> Submit </Text>
-                </Button>
-              </View>
-            </PopupDialog>
-            <Text style={styles.welcome}> {this.state.text} </Text>
-          </View>
+          <Map
+            text={this.state.text}
+            latitude={this.state.latitude}
+            longitude={this.state.longitude}
+            />
         :
           <Entry clicked={this.clicked}/>
     );
