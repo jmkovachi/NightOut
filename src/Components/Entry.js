@@ -20,7 +20,19 @@ export default class Entry extends Component {
 
   submit = () => {
     var text = this.state.text;
-    this.props.clicked(text);
+    fetch('/api/places', {
+      method: 'POST',
+      body : JSON.stringify({ location : text }),
+      headers : new Headers({
+        'Content-Type' : 'application/json'
+      })
+    }).then(result => {
+      this.props.clicked({ text : text, latitude : result.latitude, longitude : result.longitude });
+    })
+    .catch(error => {
+      // Add a popup that says that the search failed
+    });
+
   }
 
   render() {

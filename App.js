@@ -33,14 +33,18 @@ export default class App extends Component<Props> {
     this.state = {
       clicked : false,
       text : null,
+      latitude : null,
+      longitude : null,
     };
     this.clicked = this.clicked.bind(this);
   }
 
-  clicked(text) {
+  clicked(result) {
     this.setState({
       clicked : true,
-      text : text,
+      text : result.text,
+      longitude : result.longitude,
+      latitude : result.latitude,
     });
   }
   render() {
@@ -49,8 +53,8 @@ export default class App extends Component<Props> {
           <View style={styles.container}>
             <MapView style={styles.container}
               initialRegion={{
-                latitude: 37.78825,
-                longitude: -122.4324,
+                latitude: this.state.latitude,
+                longitude: this.state.longitude,
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421,
               }}
