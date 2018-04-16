@@ -11,6 +11,8 @@ import { Container, Button, Text, Item, Input } from 'native-base';
 
 import MapView, { Marker, Callout } from 'react-native-maps';
 
+import Modal from 'react-native-modal';
+
 import CalendarPicker from 'react-native-calendar-picker';
 
 import PopupDialog from 'react-native-popup-dialog';
@@ -31,6 +33,7 @@ export default class Map extends Component {
       link : null,
       markerCoordinate : null,
       selectedStartDate : null,
+      isVisible : false,
     };
     this.onMarkerPress = this.onMarkerPress.bind(this);
     this.onMapPress = this.onMapPress.bind(this);
@@ -40,8 +43,8 @@ export default class Map extends Component {
 
 
   createMarker() {
-
     this.setState({
+      isVisible : false,
       markers : [
         ...this.state.markers,
         {
@@ -56,7 +59,7 @@ export default class Map extends Component {
         }
       ],
     });
-    this.popupDialog.dismiss();
+
   }
 
   onDateChange(date) {
@@ -70,7 +73,9 @@ export default class Map extends Component {
   }
 
   onMapPress(e) {
-    this.popupDialog.show();
+    this.setState({
+      isVisible : true,
+    });
 
     this.setState({
       markerCoordinate : e.nativeEvent.coordinate,
@@ -102,16 +107,18 @@ export default class Map extends Component {
                   <Text> {marker.callout.eventText}</Text>
                   <Text> {marker.callout.description} </Text>
                   <Text> {marker.callout.link} </Text>
-
                 </View>
               </Callout>
             </Marker>
           ))}
         </MapView>
         //In the future, add react-native-modal here instead of PopupDialog
-        <PopupDialog
-          ref={(popupDialog) => { this.popupDialog = popupDialog; }}
-        >
+        <Modal
+          isVisible={this.state.isVisible}
+          onBackdropPress={() => this.setState({ isVisible: false })}
+          onSwipe={() => this.setState({ isVisible: false })}
+          swipeDirection="left"
+          >
           <View>
             <Item regular>
               <Input
@@ -135,7 +142,7 @@ export default class Map extends Component {
               <Text> Submit </Text>
             </Button>
           </View>
-        </PopupDialog>
+        </Modal>
         <Text style={styles.welcome}> {this.state.text} </Text>
       </View>
     );
