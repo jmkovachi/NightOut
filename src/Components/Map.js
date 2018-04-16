@@ -17,6 +17,8 @@ import CalendarPicker from 'react-native-calendar-picker';
 
 import PopupDialog from 'react-native-popup-dialog';
 
+import MarkerView from './MarkerView.js';
+
 let id = 0;
 
 export default class Map extends Component {
@@ -42,7 +44,7 @@ export default class Map extends Component {
   }
 
 
-  createMarker() {
+  createMarker(eventText, description, link) {
     this.setState({
       isVisible : false,
       markers : [
@@ -52,9 +54,9 @@ export default class Map extends Component {
           key: id++,
           color: '#AAAAA',
           callout : {
-            eventText : this.state.eventText,
-            description : this.state.description,
-            link : this.state.link,
+            eventText : eventText,
+            description : description,
+            link : link,
           },
         }
       ],
@@ -112,37 +114,11 @@ export default class Map extends Component {
             </Marker>
           ))}
         </MapView>
-        //In the future, add react-native-modal here instead of PopupDialog
-        <Modal
-          isVisible={this.state.isVisible}
-          onBackdropPress={() => this.setState({ isVisible: false })}
-          onSwipe={() => this.setState({ isVisible: false })}
-          swipeDirection="left"
-          >
-          <View>
-            <Item regular>
-              <Input
-                onChangeText={((text) => this.setState({ eventText : text }))}
-                placeholder='Event name' />
-            </Item>
-            <Item regular>
-              <Input
-                onChangeText={((text2) => this.setState({ description : text2 }))}
-                placeholder='Event description' />
-            </Item>
-            <Item regular>
-              <Input
-                onChangeText={((text3) => this.setState({ link : text3 }))}
-                placeholder='Link' />
-            </Item>
-            <CalendarPicker
-              onDateChange={this.onDateChange}
-            />
-            <Button onPress={this.createMarker}>
-              <Text> Submit </Text>
-            </Button>
-          </View>
-        </Modal>
+        <MarkerView
+                    isVisible={this.state.isVisible}
+                    createMarker={this.createMarker}
+                    onDateChange={this.onDateChange}
+                    />
         <Text style={styles.welcome}> {this.state.text} </Text>
       </View>
     );
