@@ -35,8 +35,8 @@
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* NightOutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* NightOutTests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
+		36061D67BDADD192DDF3D5C5 /* libPods-NightOut.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEE91E8B2F090063B814DD34 /* libPods-NightOut.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
-		7471C8F0354E769BBB0B7CAA /* libPods-NightOut.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 648FD789891BE9549A53C064 /* libPods-NightOut.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 /* End PBXBuildFile section */
@@ -340,13 +340,13 @@
 		2D02E47B1E0B4A5D006451C7 /* NightOut-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NightOut-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* NightOut-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "NightOut-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		34FC2D1EE5ACD65EF772C4A9 /* Pods-NightOut.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NightOut.release.xcconfig"; path = "Pods/Target Support Files/Pods-NightOut/Pods-NightOut.release.xcconfig"; sourceTree = "<group>"; };
+		440D3840D0EA6F60FAA00B49 /* Pods-NightOut.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NightOut.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NightOut/Pods-NightOut.debug.xcconfig"; sourceTree = "<group>"; };
+		4EE63504E4DB7F327639025B /* Pods-NightOut.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NightOut.release.xcconfig"; path = "Pods/Target Support Files/Pods-NightOut/Pods-NightOut.release.xcconfig"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
-		648FD789891BE9549A53C064 /* libPods-NightOut.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NightOut.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
-		C510639171ACF64A27ED1705 /* Pods-NightOut.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NightOut.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NightOut/Pods-NightOut.debug.xcconfig"; sourceTree = "<group>"; };
+		AEE91E8B2F090063B814DD34 /* libPods-NightOut.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NightOut.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -375,7 +375,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				7471C8F0354E769BBB0B7CAA /* libPods-NightOut.a in Frameworks */,
+				36061D67BDADD192DDF3D5C5 /* libPods-NightOut.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -525,7 +525,7 @@
 			isa = PBXGroup;
 			children = (
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
-				648FD789891BE9549A53C064 /* libPods-NightOut.a */,
+				AEE91E8B2F090063B814DD34 /* libPods-NightOut.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -592,7 +592,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				699CE33320815110006EA72F /* Recovered References */,
-				9C23690FA91DAFAC998B9F44 /* Pods */,
+				A419AA80C8331FD819DD0F7F /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -610,11 +610,11 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9C23690FA91DAFAC998B9F44 /* Pods */ = {
+		A419AA80C8331FD819DD0F7F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C510639171ACF64A27ED1705 /* Pods-NightOut.debug.xcconfig */,
-				34FC2D1EE5ACD65EF772C4A9 /* Pods-NightOut.release.xcconfig */,
+				440D3840D0EA6F60FAA00B49 /* Pods-NightOut.debug.xcconfig */,
+				4EE63504E4DB7F327639025B /* Pods-NightOut.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -653,12 +653,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "NightOut" */;
 			buildPhases = (
-				DA9DB84F9DA3014E3D0EBD97 /* [CP] Check Pods Manifest.lock */,
+				D456B523F4E9FD5AC2C17ED0 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				EA3B0350BCB40A2B46ECAA6A /* [CP] Copy Pods Resources */,
+				7E8B6FD25A96D0BA5D564327 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -717,6 +717,9 @@
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = RB4RVM76FT;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1125,25 +1128,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		DA9DB84F9DA3014E3D0EBD97 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-NightOut-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EA3B0350BCB40A2B46ECAA6A /* [CP] Copy Pods Resources */ = {
+		7E8B6FD25A96D0BA5D564327 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1181,6 +1166,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NightOut/Pods-NightOut-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D456B523F4E9FD5AC2C17ED0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NightOut-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1291,11 +1294,12 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C510639171ACF64A27ED1705 /* Pods-NightOut.debug.xcconfig */;
+			baseConfigurationReference = 440D3840D0EA6F60FAA00B49 /* Pods-NightOut.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = RB4RVM76FT;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = NightOut/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1305,16 +1309,18 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = NightOut;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 34FC2D1EE5ACD65EF772C4A9 /* Pods-NightOut.release.xcconfig */;
+			baseConfigurationReference = 4EE63504E4DB7F327639025B /* Pods-NightOut.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RB4RVM76FT;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = NightOut/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1324,6 +1330,7 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = NightOut;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

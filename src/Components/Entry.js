@@ -18,10 +18,10 @@ export default class Entry extends Component {
     this.submit = this.submit.bind(this);
   }
 
-  submit = () => {
+  submit() {
     var text = this.state.text;
-    //https://vast-fortress-13759.herokuapp.com/api/places
-    fetch('http://127.0.0.1:4000/api/places', {
+    //
+    fetch('https://vast-fortress-13759.herokuapp.com/api/places', {
       method: 'POST',
       body : JSON.stringify({ location : text }),
       headers : new Headers({
@@ -31,7 +31,6 @@ export default class Entry extends Component {
     })
     .then(result => {
       return result.json();
-
     })
     .then(result => {
       this.props.clicked({ text : text, latitude : Number(result.lat), longitude : Number(result.lng) });
