@@ -25,10 +25,10 @@ export default class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text : this.props.navigate.state.params.text,
+      text : this.props.navigation.state.params.text,
       popup : false,
-      latitude : this.props.navigate.state.params.latitude,
-      longitude : this.props.longitude.navigate.state.params.longitude,
+      latitude : this.props.navigation.state.params.latitude,
+      longitude : this.props.navigation.state.params.longitude,
       markers : [],
       markerCoordinate : null,
       selectedStartDate : null,

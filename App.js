@@ -49,12 +49,11 @@ export default class App extends Component<Props> {
   render() {
     return (
 
-        APP_ENV === 'development'
+        APP_ENV !== 'development'
         ?
           <Login />
         :
-          /*<RootStack />*/
-          null
+          <RootStack />
     );
   }
 }
