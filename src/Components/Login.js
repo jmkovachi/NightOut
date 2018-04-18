@@ -14,27 +14,57 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username : null,
-      password : null,
+      username : '',
+      password : '',
+      email : '',
       register : false,
     };
     this.onClick = this.onClick.bind(this);
   }
 
   onClick() {
-    this.state.register ?
-    {
-
+    if (this.state.register) {
+      fetch('https://vast-fortress-13759.herokuapp.com/api/register', {
+        method : 'POST',
+        body : JSON.stringify({ username : this.state.username,
+                                password : this.state.password,
+                                email    : this.state.email}),
+        headers : new Headers({
+          'Content-Type' : 'application/json',
+          'Accept' : 'application/json',
+        })})
+        .then(result => {
+          return result.json();
+        })
+        .then(result => {
+          console.log('Success');
+          //We are really just going to do a route navigation here upon success.
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
-    :
-    {
+    else {
       fetch('https://vast-fortress-13759.herokuapp.com/api/login', {
         method : 'POST',
         body : JSON.stringify({ username : this.state.username,
                                 password : this.state.password}),
+        headers : new Headers({
+          'Content-Type' : 'application/json',
+          'Accept' : 'application/json',
+        })
+        .then(result => {
+          return result.json();
+        })
+        .then(result => {
+          console.log('Success');
+          //We are really just going to do a route navigation here upon success.
+        })
+        .catch(error => {
 
+        })
 
-      }
+      });
     };
   }
 

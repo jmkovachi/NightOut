@@ -18,6 +18,9 @@ import { Container, Button, Text, Item, Input } from 'native-base';
 import Map from './src/Components/Map.js';
 import Entry from './src/Components/Entry.js';
 import Login from './src/Components/Login.js';
+
+const APP_ENV = 'development';
+
 console.disableYellowBox = true;
 
 type Props = {};
@@ -44,15 +47,21 @@ export default class App extends Component<Props> {
 
   render() {
     return (
-        <Login />
-        /*this.state.clicked ?
-          <Map
-            text={this.state.text}
-            latitude={this.state.latitude}
-            longitude={this.state.longitude}
-            />
+
+        APP_ENV !== 'development'
+        ?
+          <Login />
         :
-          <Entry clicked={this.clicked}/>*/
+
+          this.state.clicked ?
+            (<Map
+              text={this.state.text}
+              latitude={this.state.latitude}
+              longitude={this.state.longitude}
+              /> )
+          :
+            (<Entry clicked={this.clicked}/>)
+
     );
   }
 }
