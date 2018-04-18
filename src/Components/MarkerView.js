@@ -11,9 +11,11 @@ import {
 
 import Modal from 'react-native-modal';
 
-import { Container, Button, Text, Item, Input } from 'native-base';
+import { Container, Button, Text, Item, Input, Picker } from 'native-base';
 
 import CalendarPicker from 'react-native-calendar-picker';
+
+import Icon from 'react-native-vector-icons/Entypo';
 
 export default class MarkerView extends Component {
   constructor(props) {
@@ -23,12 +25,20 @@ export default class MarkerView extends Component {
       eventText : null,
       description : null,
       link : null,
+      eventType : '',
     };
+    this.eventChange = this.eventChange.bind(this);
   }
 
   componentWillMount() {
     this.setState({
       isVisible : this.props.isVisible,
+    });
+  }
+
+  eventChange(val) {
+    this.setState({
+      eventType : val,
     });
   }
 
@@ -53,8 +63,8 @@ export default class MarkerView extends Component {
         style={{flex : 1}}
         >
         <ScrollView style={{backgroundColor : 'white', borderRadius : 30,
-                      maxWidth : 300,
-                      maxHeight : 500,
+                      maxWidth : 400,
+                      maxHeight : 550,
                       alignSelf : 'center',
                     }}>
           <Item style={styles.textbox} regular>
@@ -75,9 +85,22 @@ export default class MarkerView extends Component {
           <CalendarPicker
              style={styles.textbox}
             onDateChange={this.props.onDateChange}
-            width={250}
+            width={2750}
             height={250}
           />
+          <Picker
+            mode="dropdown"
+            iosIcon={<Icon name="chevron-down" />}
+            placeholder="What type of event is this?"
+            placeholderStyle={{ color: "#bfc6ea" }}
+            placeholderIconColor="#007aff"
+            style={{ width: undefined }}
+            selectedValue={this.state.eventType}
+            onValueChange={this.eventChange}
+            >
+            <Picker.Item label="Private" value="private" />
+            <Picker.Item label="Public" value="public" />
+          </Picker>
           <Button onPress={() => {
                             this.setState({ isVisible : false });
                             this.props.createMarker(this.state.eventText,
@@ -95,5 +118,7 @@ export default class MarkerView extends Component {
 const styles = StyleSheet.create({
   textbox : {
     margin : 30,
+    paddingLeft : 20,
+    paddingRight : 20,
   }
 })

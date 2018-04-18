@@ -83,12 +83,8 @@ export default class Map extends Component {
   onMapPress(e) {
     this.setState({
       isVisible : true,
-    });
-
-    this.setState({
       markerCoordinate : e.nativeEvent.coordinate,
     });
-
   }
 
   render() {
