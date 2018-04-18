@@ -17,6 +17,7 @@ import { Container, Button, Text, Item, Input } from 'native-base';
 
 import Map from './src/Components/Map.js';
 import Entry from './src/Components/Entry.js';
+import Login from './src/Components/Login.js';
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -42,14 +43,15 @@ export default class App extends Component<Props> {
 
   render() {
     return (
-        this.state.clicked ?
+        <Login />
+        /*this.state.clicked ?
           <Map
             text={this.state.text}
             latitude={this.state.latitude}
             longitude={this.state.longitude}
             />
         :
-          <Entry clicked={this.clicked}/>
+          <Entry clicked={this.clicked}/>*/
     );
   }
 }
