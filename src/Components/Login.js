@@ -22,22 +22,26 @@ export default class Login extends Component {
   }
 
   onClick() {
-    /*fetch('https://vast-fortress-13759.herokuapp.com/api/login', {
-      method : 'POST',
-      body : JSON.stringify({ username : this.state.username,
-                              password : this.state.password}),
+    this.state.register ?
+    {
+
+    }
+    :
+    {
+      fetch('https://vast-fortress-13759.herokuapp.com/api/login', {
+        method : 'POST',
+        body : JSON.stringify({ username : this.state.username,
+                                password : this.state.password}),
 
 
-    }*/
+      }
+    };
   }
 
   render() {
     return (
       <Container style={styles.container}>
         <View style={styles.loginBox}>
-          { this.state.register ?
-              <Text> Hi </Text>
-          :
             <Container>
               <Item rounded style={styles.username}>
                 <Input onChangeText={((text) => this.setState({ text : text }))}
@@ -47,13 +51,19 @@ export default class Login extends Component {
                 <Input secureTextEntry={true} onChangeText={((text) => this.setState({ text : text }))}
                 placeholder='Password'/>
               </Item>
+              { this.state.register ?
+                <Item rounded style={styles.email}>
+                  <Input onChangeText={text => this.setState({ email : text })}
+                  placeholder='Email'/>
+                </Item>
+              :
+                null }
               <Button bordered warning
                       style={styles.button}
                       onPress={() => this.onClick()}>
-                <Text> Submit </Text>
+                <Text> {this.state.register ? 'Register' : 'Submit' } </Text>
               </Button>
             </Container>
-        }
         </View>
         <View style={styles.register}>
           <Text > {this.state.register ? "" : "Don't have an account? Sign up."} </Text>
@@ -93,6 +103,11 @@ const styles = StyleSheet.create({
     alignSelf : 'center',
     margin : 30,
     width : 300,
+  },
+  email : {
+    alignSelf : 'center',
+    width : 300,
+    margin : 30,
   },
   button : {
     alignSelf : 'center',
