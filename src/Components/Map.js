@@ -17,6 +17,8 @@ import CalendarPicker from 'react-native-calendar-picker';
 
 import PopupDialog from 'react-native-popup-dialog';
 
+import Icon from 'react-native-vector-icons/Entypo';
+
 import MarkerView from './MarkerView.js';
 
 let id = 0;
@@ -102,9 +104,7 @@ export default class Map extends Component {
       // Main View
 
         <View style={styles.container}>
-          <Button onPress={() => this.openDrawer()}>
-            <Text> Press me </Text>
-          </Button>
+
           <MapView style={styles.container}
             initialRegion={{
               latitude: this.state.latitude,
@@ -132,6 +132,9 @@ export default class Map extends Component {
             ))}
           </MapView>
           // MarkerView is the component that holds our marker creation view
+          <Button style={styles.button} onPress={() => this.openDrawer()}>
+            <Icon name="menu" size={30} style={{backgroundColor : 'transparent'}} />
+          </Button>
           <MarkerView
                       isVisible={this.state.isVisible}
                       createMarker={this.createMarker}
@@ -150,11 +153,19 @@ export default class Map extends Component {
       flex: 1,
       width : Dimensions.get('window').width,
       height : Dimensions.get('window').height,
+      backgroundColor : 'transparent',
     },
     welcome: {
+      position : 'absolute',
       fontSize: 20,
       textAlign: 'center',
       margin: 10,
+      bottom : 5,
+    },
+    button: {
+      position : 'absolute',
+      top : 0,
+      backgroundColor: 'transparent',
     },
     instructions: {
       textAlign: 'center',

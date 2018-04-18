@@ -70,6 +70,9 @@ const RootStack = StackNavigator(
   },
   {
     initialRouteName: 'EntryScreen',
+    navigationOptions: {
+      header : null,
+    },
   }
 );
 

@@ -4,6 +4,7 @@ import {
   Platform,
   StyleSheet,
   View,
+  ScrollView,
   Image,
   Dimensions
 } from 'react-native';
@@ -47,25 +48,35 @@ export default class MarkerView extends Component {
         onBackdropPress={() => this.setState({ isVisible: false })}
         onSwipe={() => this.setState({ isVisible: false })}
         swipeDirection="left"
+        transparent={true}
+        backdropColor="transparent"
+        style={{flex : 1}}
         >
-        <View>
-          <Item regular>
+        <ScrollView style={{backgroundColor : 'white', borderRadius : 30,
+                      maxWidth : 300,
+                      maxHeight : 500,
+                      alignSelf : 'center',
+                    }}>
+          <Item style={styles.textbox} regular>
             <Input
               onChangeText={((text) => this.setState({ eventText : text }))}
               placeholder='Event name' />
           </Item>
-          <Item regular>
+          <Item style={styles.textbox} regular>
             <Input
               onChangeText={((text2) => this.setState({ description : text2 }))}
               placeholder='Event description' />
           </Item>
-          <Item regular>
+          <Item style={styles.textbox}  regular>
             <Input
               onChangeText={((text3) => this.setState({ link : text3 }))}
               placeholder='Link' />
           </Item>
           <CalendarPicker
+             style={styles.textbox}
             onDateChange={this.props.onDateChange}
+            width={250}
+            height={250}
           />
           <Button onPress={() => {
                             this.setState({ isVisible : false });
@@ -75,8 +86,14 @@ export default class MarkerView extends Component {
                           }}>
             <Text> Submit </Text>
           </Button>
-        </View>
+        </ScrollView>
       </Modal>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  textbox : {
+    margin : 30,
+  }
+})

@@ -61,7 +61,7 @@ export default class Entry extends Component {
             onChangeText={((text) => this.setState({ text : text }))}
             placeholder='Where do you want to go tonight?' />
         </Item>
-        <Button bordered light onPress={this.submit} style={styles.Button}>
+        <Button bordered warning onPress={this.submit} style={styles.Button}>
           <Text> Submit </Text>
         </Button>
       </Container>
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     width : Dimensions.get('window').width,
     height : Dimensions.get('window').height,
     justifyContent: 'center',
-    backgroundColor : '#9b1cb5',
+    backgroundColor : '#f9f9f9',
   },
   welcome: {
     fontSize: 20,
