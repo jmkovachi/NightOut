@@ -12,6 +12,8 @@ import Modal from 'react-native-modal';
 import CalendarPicker from 'react-native-calendar-picker';
 import PopupDialog from 'react-native-popup-dialog';
 import Icon from 'react-native-vector-icons/Entypo';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import { Picker, DatePicker } from 'react-native-wheel-datepicker';
 import MarkerView from './MarkerView.js';
 
 let id = 0;
@@ -29,6 +31,7 @@ export default class Map extends Component {
       selectedStartDate : null,
       isVisible : false,
       draw : false,
+      date : false,
     };
     this.onMarkerPress = this.onMarkerPress.bind(this);
     this.onMapPress = this.onMapPress.bind(this);
@@ -123,14 +126,26 @@ export default class Map extends Component {
               </Marker>
             ))}
           </MapView>
-          // MarkerView is the component that holds our marker creation view
+          { this.state.date ?
+            <DatePicker
+              mode="date"
+              onDateChange={(date) => console.log(date)}
+              style={{ position : 'absolute', top : 0, left : 0, right : 0,}}
+            />
+          :
+            null }
           <Button style={styles.button} onPress={() => this.openDrawer()}>
             <Icon name="menu" size={30} style={{backgroundColor : 'transparent'}} />
           </Button>
           <Button style={this.state.draw ? styles.drawButtonHighLighted : styles.drawButton}
-                  onPress={() => this.setState({ draw : !this.state.draw })}>
+                  onPress={(e) => {e.stopPropagation(); this.setState({ draw : !this.state.draw });}}>
             <Icon style={styles.brush} size={20} name="round-brush"/>
           </Button>
+          <Button style={this.state.date ? styles.dateButtonHighLighted : styles.dateButton}
+                  onPress={() => this.setState({ date : !this.state.date })}>
+            <MaterialIcon style={styles.brush} size={20} name="date-range"/>
+          </Button>
+          // MarkerView is the component that holds our marker creation view
           <MarkerView
                       isVisible={this.state.isVisible}
                       createMarker={this.createMarker}
@@ -182,6 +197,26 @@ const styles = StyleSheet.create({
     borderRadius : 30,
     flex : 1,
     backgroundColor : 'gold',
+  },
+  dateButton : {
+    position : 'absolute',
+    top : 60,
+    right : 10,
+    width : 30,
+    height : 30,
+    borderRadius : 30,
+    flex : 1,
+    backgroundColor : 'transparent',
+  },
+  dateButtonHighLighted : {
+    position : 'absolute',
+    top : 60,
+    right : 10,
+    width : 30,
+    height : 30,
+    borderRadius : 30,
+    flex : 1,
+    backgroundColor : 'blue',
   },
   brush : {
     borderRadius : 5,
