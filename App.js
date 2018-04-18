@@ -18,6 +18,7 @@ import { Container, Button, Text, Item, Input } from 'native-base';
 import Map from './src/Components/Map.js';
 import Entry from './src/Components/Entry.js';
 import Login from './src/Components/Login.js';
+import { StackNavigator } from 'react-navigation';
 
 const APP_ENV = 'development';
 
@@ -48,23 +49,30 @@ export default class App extends Component<Props> {
   render() {
     return (
 
-        APP_ENV !== 'development'
+        APP_ENV === 'development'
         ?
           <Login />
         :
-
-          this.state.clicked ?
-            (<Map
-              text={this.state.text}
-              latitude={this.state.latitude}
-              longitude={this.state.longitude}
-              /> )
-          :
-            (<Entry clicked={this.clicked}/>)
-
+          /*<RootStack />*/
+          null
     );
   }
 }
+
+
+const RootStack = StackNavigator(
+  {
+    EntryScreen: {
+      screen: Entry,
+    },
+    MapScreen: {
+      screen: Map,
+    },
+  },
+  {
+    initialRouteName: 'EntryScreen',
+  }
+);
 
 const styles = StyleSheet.create({
   container: {

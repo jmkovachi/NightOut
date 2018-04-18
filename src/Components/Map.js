@@ -25,10 +25,10 @@ export default class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text : this.props.text,
+      text : this.props.navigate.state.params.text,
       popup : false,
-      latitude : this.props.latitude,
-      longitude : this.props.longitude,
+      latitude : this.props.navigate.state.params.latitude,
+      longitude : this.props.longitude.navigate.state.params.longitude,
       markers : [],
       markerCoordinate : null,
       selectedStartDate : null,
@@ -94,7 +94,9 @@ export default class Map extends Component {
       <Drawer
         ref={(ref) => { this.drawer = ref; }}
         content={<Content style={{backgroundColor:'#FFFFFF'}}>
-                <Text>Drawer</Text>
+                <Button onPress={() => this.props.navigation.navigate('EntryScreen')}>
+                  <Text> Back to Search </Text>
+                </Button>
               </Content>}
         onClose={() => this.closeDrawer()} >
       // Main View

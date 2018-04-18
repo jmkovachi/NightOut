@@ -33,7 +33,14 @@ export default class Entry extends Component {
       return result.json();
     })
     .then(result => {
-      this.props.clicked({ text : text, latitude : Number(result.lat), longitude : Number(result.lng) });
+      this.props.navigation.navigate(
+        'MapScreen',
+        {
+          text : text,
+          latitude : Number(result.lat),
+          longitude : Number(result.lng),
+        },
+      );
     })
     .catch(error => {
       console.log(error);
