@@ -6,19 +6,12 @@ import {
   Image,
   Dimensions
 } from 'react-native';
-
 import { Container, Content, Button, Text, Item, Input, Drawer } from 'native-base';
-
 import MapView, { Marker, Callout } from 'react-native-maps';
-
 import Modal from 'react-native-modal';
-
 import CalendarPicker from 'react-native-calendar-picker';
-
 import PopupDialog from 'react-native-popup-dialog';
-
 import Icon from 'react-native-vector-icons/Entypo';
-
 import MarkerView from './MarkerView.js';
 
 let id = 0;
@@ -35,6 +28,7 @@ export default class Map extends Component {
       markerCoordinate : null,
       selectedStartDate : null,
       isVisible : false,
+      draw : false,
     };
     this.onMarkerPress = this.onMarkerPress.bind(this);
     this.onMapPress = this.onMapPress.bind(this);
@@ -81,10 +75,12 @@ export default class Map extends Component {
   }
 
   onMapPress(e) {
-    this.setState({
-      isVisible : true,
-      markerCoordinate : e.nativeEvent.coordinate,
-    });
+    if (this.state.draw) {
+      this.setState({
+        isVisible : true,
+        markerCoordinate : e.nativeEvent.coordinate,
+      });
+    }
   }
 
   render() {
@@ -131,6 +127,10 @@ export default class Map extends Component {
           <Button style={styles.button} onPress={() => this.openDrawer()}>
             <Icon name="menu" size={30} style={{backgroundColor : 'transparent'}} />
           </Button>
+          <Button style={this.state.draw ? styles.drawButtonHighLighted : styles.drawButton}
+                  onPress={() => this.setState({ draw : !this.state.draw })}>
+            <Icon style={styles.brush} size={20} name="round-brush"/>
+          </Button>
           <MarkerView
                       isVisible={this.state.isVisible}
                       createMarker={this.createMarker}
@@ -144,33 +144,59 @@ export default class Map extends Component {
 }
 
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      width : Dimensions.get('window').width,
-      height : Dimensions.get('window').height,
-      backgroundColor : 'transparent',
-    },
-    welcome: {
-      position : 'absolute',
-      fontSize: 20,
-      textAlign: 'center',
-      margin: 10,
-      bottom : 5,
-    },
-    button: {
-      position : 'absolute',
-      top : 0,
-      backgroundColor: 'transparent',
-    },
-    instructions: {
-      textAlign: 'center',
-      color: '#333333',
-      marginBottom: 5,
-    },
-    imageStyle: {
-      position : 'absolute',
-      width : Dimensions.get('window').width,
-      height : Dimensions.get('window').height,
-    }
-  });
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width : Dimensions.get('window').width,
+    height : Dimensions.get('window').height,
+    backgroundColor : 'transparent',
+  },
+  welcome: {
+    position : 'absolute',
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+    bottom : 5,
+  },
+  button: {
+    position : 'absolute',
+    top : 10,
+    backgroundColor: 'transparent',
+  },
+  drawButton : {
+    position : 'absolute',
+    top : 20,
+    right : 10,
+    width : 30,
+    height : 30,
+    borderRadius : 30,
+    flex : 1,
+    backgroundColor : 'transparent',
+  },
+  drawButtonHighLighted : {
+    position : 'absolute',
+    top : 20,
+    right : 10,
+    width : 30,
+    height : 30,
+    borderRadius : 30,
+    flex : 1,
+    backgroundColor : 'gold',
+  },
+  brush : {
+    borderRadius : 5,
+    alignSelf : 'center',
+    bottom : 4,
+    left : 4,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
+  },
+  imageStyle: {
+    position : 'absolute',
+    width : Dimensions.get('window').width,
+    height : Dimensions.get('window').height,
+  }
+});
