@@ -45,16 +45,16 @@ export default class Entry extends Component {
   render() {
     return (
       <Container style={styles.container}>
-        <Image style={styles.imageStyle} source={require('../../assets/party.jpg')}/>
+
         <Text style={styles.welcome}>
           Welcome to NightOut
         </Text>
-        <Item regular>
+        <Item rounded style={styles.textbox}>
           <Input
             onChangeText={((text) => this.setState({ text : text }))}
             placeholder='Where do you want to go tonight?' />
         </Item>
-        <Button onPress={this.submit}>
+        <Button bordered light onPress={this.submit} style={styles.Button}>
           <Text> Submit </Text>
         </Button>
       </Container>
@@ -68,16 +68,20 @@ const styles = StyleSheet.create({
     flex: 1,
     width : Dimensions.get('window').width,
     height : Dimensions.get('window').height,
+    justifyContent: 'center',
+    backgroundColor : '#9b1cb5',
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
-    margin: 10,
+    margin: 20,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  Button: {
+    alignSelf: 'center',
+    margin : 20,
+  },
+  textbox :{
+    margin : 20,
   },
   imageStyle: {
     position : 'absolute',

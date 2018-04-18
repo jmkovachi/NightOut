@@ -7,7 +7,7 @@ import {
   Dimensions
 } from 'react-native';
 
-import { Container, Button, Text, Item, Input } from 'native-base';
+import { Container, Content, Button, Text, Item, Input, Drawer } from 'native-base';
 
 import MapView, { Marker, Callout } from 'react-native-maps';
 
@@ -30,9 +30,6 @@ export default class Map extends Component {
       latitude : this.props.latitude,
       longitude : this.props.longitude,
       markers : [],
-      eventText : null,
-      description : null,
-      link : null,
       markerCoordinate : null,
       selectedStartDate : null,
       isVisible : false,
@@ -43,6 +40,13 @@ export default class Map extends Component {
     this.onDateChange = this.onDateChange.bind(this);
   }
 
+  closeDrawer = () => {
+      this.drawer._root.close()
+    };
+
+  openDrawer = () => {
+    this.drawer._root.open()
+  };
 
   createMarker(eventText, description, link) {
     this.setState({
@@ -87,40 +91,53 @@ export default class Map extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <MapView style={styles.container}
-          initialRegion={{
-            latitude: this.state.latitude,
-            longitude: this.state.longitude,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }}
-          onPress={(e) => this.onMapPress(e)}
-        >
-          {this.state.markers.map(marker => (
-            <Marker
-              key={marker.key}
-              coordinate={marker.coordinate}
-              pinColor={marker.pinColor}
-              onPress={(e) => {e.stopPropagation(); this.onMarkerPress(e);}}
-            >
-             <Callout>
-                <View>
-                  <Text> {marker.callout.eventText}</Text>
-                  <Text> {marker.callout.description} </Text>
-                  <Text> {marker.callout.link} </Text>
-                </View>
-              </Callout>
-            </Marker>
-          ))}
-        </MapView>
-        <MarkerView
-                    isVisible={this.state.isVisible}
-                    createMarker={this.createMarker}
-                    onDateChange={this.onDateChange}
-                    />
-        <Text style={styles.welcome}> {this.state.text} </Text>
-      </View>
+      <Drawer
+        ref={(ref) => { this.drawer = ref; }}
+        content={<Content style={{backgroundColor:'#FFFFFF'}}>
+                <Text>Drawer</Text>
+              </Content>}
+        onClose={() => this.closeDrawer()} >
+      // Main View
+
+        <View style={styles.container}>
+          <Button onPress={() => this.openDrawer()}>
+            <Text> Press me </Text>
+          </Button>
+          <MapView style={styles.container}
+            initialRegion={{
+              latitude: this.state.latitude,
+              longitude: this.state.longitude,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            }}
+            onPress={(e) => this.onMapPress(e)}
+          >
+            {this.state.markers.map(marker => (
+              <Marker
+                key={marker.key}
+                coordinate={marker.coordinate}
+                pinColor={marker.pinColor}
+                onPress={(e) => {e.stopPropagation(); this.onMarkerPress(e);}}
+              >
+               <Callout>
+                  <View>
+                    <Text> {marker.callout.eventText}</Text>
+                    <Text> {marker.callout.description} </Text>
+                    <Text> {marker.callout.link} </Text>
+                  </View>
+                </Callout>
+              </Marker>
+            ))}
+          </MapView>
+          // MarkerView is the component that holds our marker creation view
+          <MarkerView
+                      isVisible={this.state.isVisible}
+                      createMarker={this.createMarker}
+                      onDateChange={this.onDateChange}
+                      />
+          <Text style={styles.welcome}> {this.state.text} </Text>
+        </View>
+      </Drawer>
     );
   }
 }
