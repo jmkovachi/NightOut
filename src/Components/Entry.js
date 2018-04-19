@@ -20,7 +20,7 @@ export default class Entry extends Component {
 
   submit() {
     var text = this.state.text;
-    //
+    console.log('hi');
     fetch('https://vast-fortress-13759.herokuapp.com/api/places', {
       method: 'POST',
       body : JSON.stringify({ location : text }),
@@ -33,6 +33,7 @@ export default class Entry extends Component {
       return result.json();
     })
     .then(result => {
+      console.log('result');
       this.props.navigation.navigate(
         'MapScreen',
         {

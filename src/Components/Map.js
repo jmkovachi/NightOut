@@ -127,13 +127,22 @@ export default class Map extends Component {
             ))}
           </MapView>
           { this.state.date ?
-            <DatePicker
-              mode="date"
-              onDateChange={(date) => console.log(date)}
-              style={{ position : 'absolute', top : 0, left : 0, right : 0,}}
-            />
-          :
-            null }
+            [
+              <DatePicker
+                key={1}
+                mode="date"
+                onDateChange={(date) => console.log(date)}
+                style={{ position : 'absolute', top : 0, left : 0, right : 0,}}
+              />,
+              <Button
+                key={2}
+                onPress={() => this.setState({ date : false })}
+                style={{ position : 'absolute', top : 200, left : 100, right : 100}}>
+                <Text style={{alignSelf : 'center'}}> Submit </Text>
+              </Button>
+            ]
+            :
+              null }
           <Button style={styles.button} onPress={() => this.openDrawer()}>
             <Icon name="menu" size={30} style={{backgroundColor : 'transparent'}} />
           </Button>
