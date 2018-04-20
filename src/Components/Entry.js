@@ -9,13 +9,22 @@ import {
 
 import { Container, Text, Button, Input, Item } from 'native-base';
 
-export default class Entry extends Component {
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import * as Actions from '../Actions/setUser.js'; //Import your actions
+
+class Entry extends Component {
   constructor(props) {
     super(props);
     this.state = {
       text : null,
     };
     this.submit = this.submit.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.setUser('johnm.kovachi@gmail.com');
   }
 
   submit() {
@@ -72,6 +81,17 @@ export default class Entry extends Component {
   }
 }
 
+function mapStateToProps(state, props) {
+    return {
+      username : state.username,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(Actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Entry);
 
 const styles = StyleSheet.create({
   container: {

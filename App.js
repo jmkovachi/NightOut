@@ -13,6 +13,10 @@ import {
   Dimensions
 } from 'react-native';
 
+import { Provider } from 'react-redux';
+
+import store from './src/Store/store';
+
 import { Container, Button, Text, Item, Input } from 'native-base';
 
 import Map from './src/Components/Map.js';
@@ -48,12 +52,15 @@ export default class App extends Component<Props> {
 
   render() {
     return (
-
+      <Provider store={store} >
+        {
         APP_ENV !== 'development'
         ?
           <Login />
         :
           <RootStack />
+        }
+      </ Provider>
     );
   }
 }

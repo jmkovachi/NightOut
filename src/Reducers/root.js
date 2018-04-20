@@ -1,4 +1,4 @@
-import { SET_USER } from '../Actions/';
+import { SET_USER } from '../Actions/setUser.js';
 
 let initState = { username : null };
 
@@ -12,3 +12,5 @@ const rootReducer = (state = initState, action) => {
 
   }
 };
+
+export default rootReducer;
