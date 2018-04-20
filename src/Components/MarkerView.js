@@ -85,7 +85,7 @@ export default class MarkerView extends Component {
           <CalendarPicker
              style={styles.textbox}
             onDateChange={this.props.onDateChange}
-            width={2750}
+            width={275}
             height={250}
           />
           <Picker
