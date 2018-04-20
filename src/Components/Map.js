@@ -15,6 +15,7 @@ import Icon from 'react-native-vector-icons/Entypo';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { Picker, DatePicker } from 'react-native-wheel-datepicker';
 import MarkerView from './MarkerView.js';
+import Sidebar from './Sidebar.js';
 
 let id = 0;
 
@@ -111,11 +112,7 @@ export default class Map extends Component {
     return (
       <Drawer
         ref={(ref) => { this.drawer = ref; }}
-        content={<Content style={{backgroundColor:'#FFFFFF'}}>
-                <Button onPress={() => this.props.navigation.navigate('EntryScreen')}>
-                  <Text> Back to Search </Text>
-                </Button>
-              </Content>}
+        content={<Sidebar navigation={this.props.navigation}/>}
         onClose={() => this.closeDrawer()} >
       // Main View
 
