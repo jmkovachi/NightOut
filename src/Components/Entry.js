@@ -21,7 +21,8 @@ export default class Entry extends Component {
   submit() {
     var text = this.state.text;
     console.log('hi');
-    fetch('https://vast-fortress-13759.herokuapp.com/api/places', {
+    //fetch('https://vast-fortress-13759.herokuapp.com/api/places', {
+    fetch('http://127.0.0.1:4000/api/places', {
       method: 'POST',
       body : JSON.stringify({ location : text }),
       headers : new Headers({
@@ -33,13 +34,15 @@ export default class Entry extends Component {
       return result.json();
     })
     .then(result => {
-      console.log('result');
+      console.log(result);
+
       this.props.navigation.navigate(
         'MapScreen',
         {
           text : text,
-          latitude : Number(result.lat),
-          longitude : Number(result.lng),
+          latitude : Number(result.location.lat),
+          longitude : Number(result.location.lng),
+          markers : result.markers,
         },
       );
     })
@@ -53,7 +56,6 @@ export default class Entry extends Component {
   render() {
     return (
       <Container style={styles.container}>
-
         <Text style={styles.welcome}>
           Welcome to NightOut
         </Text>

@@ -26,7 +26,7 @@ export default class Map extends Component {
       popup : false,
       latitude : this.props.navigation.state.params.latitude,
       longitude : this.props.navigation.state.params.longitude,
-      markers : [],
+      markers : this.props.navigation.state.params.markers,
       markerCoordinate : null,
       selectedStartDate : null,
       isVisible : false,
@@ -46,6 +46,27 @@ export default class Map extends Component {
   openDrawer = () => {
     this.drawer._root.open()
   };
+
+  addMarkers = () => {
+    fetch('http://127.0.0.1:4000/api/addmarkers', {
+      method: 'POST',
+      body : JSON.stringify({ markers : this.state.markers }),
+      headers : new Headers({
+        'Content-Type' : 'application/json',
+        'Accept' : 'application/json',
+      })
+    })
+    .then(result => {
+      return result.json();
+    })
+    .then(result => {
+      console.log(result);
+    })
+    .catch(error => {
+      console.log(error);
+      // Add a popup that says that the search failed
+    });
+  }
 
   createMarker(eventText, description, link) {
     this.setState({
@@ -160,6 +181,10 @@ export default class Map extends Component {
                       createMarker={this.createMarker}
                       onDateChange={this.onDateChange}
                       />
+          <Button style={{ position : 'absolute', bottom : 0, right : 0}}
+                  onPress={() => this.addMarkers()}>
+                  <Text> Add markers </Text>
+          </Button>
           <Text style={styles.welcome}> {this.state.text} </Text>
         </View>
       </Drawer>
