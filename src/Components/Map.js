@@ -17,9 +17,14 @@ import { Picker, DatePicker } from 'react-native-wheel-datepicker';
 import MarkerView from './MarkerView.js';
 import Sidebar from './Sidebar.js';
 
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import * as Actions from '../Actions/setUser.js'; //Import your actions
+
 let id = 0;
 
-export default class Map extends Component {
+class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,9 +45,13 @@ export default class Map extends Component {
     this.onDateChange = this.onDateChange.bind(this);
   }
 
+  componentDidMount() {
+    console.log(this.props.username);
+  }
+
   closeDrawer = () => {
-      this.drawer._root.close()
-    };
+    this.drawer._root.close()
+  };
 
   openDrawer = () => {
     this.drawer._root.open()
@@ -51,7 +60,7 @@ export default class Map extends Component {
   addMarkers = () => {
     fetch('http://127.0.0.1:4000/api/addmarkers', {
       method: 'POST',
-      body : JSON.stringify({ markers : this.state.markers }),
+      body : JSON.stringify({ markers : this.state.markers, username : this.props.username }),
       headers : new Headers({
         'Content-Type' : 'application/json',
         'Accept' : 'application/json',
@@ -182,12 +191,25 @@ export default class Map extends Component {
                   onPress={() => this.addMarkers()}>
                   <Text> Add markers </Text>
           </Button>
-          <Text style={styles.welcome}> {this.state.text} </Text>
+          <Text style={styles.welcome}> {this.props.username} </Text>
         </View>
       </Drawer>
     );
   }
 }
+
+function mapStateToProps(state, props) {
+    console.log(state);
+    return {
+      username : state.username,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(Actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Map);
 
 
 const styles = StyleSheet.create({

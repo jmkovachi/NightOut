@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 
 import {
-  View
+  View,
+  StyleSheet
 } from 'react-native';
 
-import { Text, Button, Content, List, ListItem, Left, Icon } from 'native-base';
+import { Header, Text, Button, Content, List, ListItem, Left, Icon } from 'native-base';
 
 export default class Sidebar extends Component {
   constructor(props) {
@@ -13,16 +14,24 @@ export default class Sidebar extends Component {
 
   render() {
     return (
-      <Content style={{ backgroundColor : '#FFFFFF'}}>
+      <Content style={{ backgroundColor : '#232426'}}>
+        <Header style={{ backgroundColor : '#232426'}}> <Text style={styles.text}> NightOut </Text></Header>
         <List>
-          <ListItem> <Text> Welcome </Text> </ListItem>
-          <ListItem> <Text> This an example </Text> </ListItem>
+          <ListItem> <Text style={styles.text}> Explore </Text> </ListItem>
+          <ListItem> <Text style={styles.text}> Plans </Text> </ListItem>
           <ListItem onPress={() => this.props.navigation.navigate(
             'EntryScreen'
-          )}> <Text> Search </Text> </ListItem>
-          <ListItem icon> <Left> <Icon name="contacts"/> </Left> <Text> Friends </Text> </ListItem>
+          )}> <Text style={styles.text}> Search </Text> </ListItem>
+          <ListItem> <Text style={styles.text}> Friends </Text> </ListItem>
+          <ListItem> <Text style={styles.text}> Settings </Text></ListItem>
         </List>
       </Content>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  text : {
+    color : '#3a85ff'
+  }
+})
